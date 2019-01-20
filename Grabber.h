@@ -26,10 +26,10 @@ class Grabber {
     }
   
     void changeCoord() {
-      if(leftMotor.getDir() && rightMotor.getDir() && x > 0) { x--; }
-      if(leftMotor.getDir() && !rightMotor.getDir()) { y++; }
-      if(!leftMotor.getDir() && rightMotor.getDir() && y > 0) {y--; }
-      if(!leftMotor.getDir() && !rightMotor.getDir()){ x++; }
+      if(leftMotor.getDir() == HIGH && rightMotor.getDir() == HIGH && x > 0) { x--; }
+      if(leftMotor.getDir() == HIGH && rightMotor.getDir() == LOW) { y++; }
+      if(leftMotor.getDir() == LOW && rightMotor.getDir() == HIGH && y > 0) {y--; }
+      if(leftMotor.getDir() == LOW && rightMotor.getDir() == LOW){ x++; }
     }
 
     // change rotating direction to certain motor

@@ -5,21 +5,14 @@
  Author      :
  Description :
 ******************************************************************/
+#include "BusinessController.h"
 
-#include "RelMotorController.h"
+  BusinessController bc;
+  
+  void setup(){}
 
-
-void setup()
-{
-RelMotorController rmc();
-
-    // write your setup code here, to run once
-
-}
-
-void loop()
-{
-
-    // write your main code here, to run repeatedly
-
-}
+  void loop() {
+      bc.firstMove();
+      delay(2000);
+      bc.secondMove();
+  }

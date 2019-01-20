@@ -5,9 +5,9 @@
 #include "Grabber.h"
 
 class RelMotorController {
-
+    private:
     Grabber grabber = Grabber();
-    
+    public:
     void moveMotors(int impulseCount){
       for(int i = 0; i < impulseCount; i++){
           grabber.getLeftMotor().moveMotor();
@@ -45,7 +45,10 @@ class RelMotorController {
         executeMoving(true, false, dist);
     }
 
+    Grabber getGrabber() { return grabber; }
+    
     int getX() { grabber.getX(); }
+    
     int getY() { grabber.getY(); }
 };
 #endif

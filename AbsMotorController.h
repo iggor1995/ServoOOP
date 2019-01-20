@@ -2,13 +2,27 @@
 #define AbsMotorController_h  // тогда подключаем ее
 
 #include <Arduino.h>
-#include <RelMotorController.h>
+#include "RelMotorController.h"
+#include "ScadaRouting.h"
 
 class AbsMotorController {
 
     RelMotorController rmc;
+    
+  private:
+    int grabbingPartXCoord = 1400;
+    int grabbingPartYCoord = 24780;
+    byte isGripperPlaced = 4;
+    
+  public:  
+  
+  void moveToGrabbingPos(ScadaRouting sr){
+        sr.writeDataCoils(28, 1);
+        sr.setCoordinates(grabbingPartXCoord, grabbingPartYCoord);
+        xMoveToPos(grabbingPartXCoord);
+        yMoveToPos(grabbingPartYCoord);
+    }
 
-  // move grabber to absolute position by x coordinates
   void xMoveToPos(int pos){
     digitalWrite(isGripperPlaced, LOW);
     int moveX;
@@ -23,8 +37,15 @@ class AbsMotorController {
     }    
   }
   
-// move grabber to absolute position by y coordinates
-   void yMoveToPos(int pos){
+  void moveRight(int delta) {
+    rmc.moveRight(delta);
+  }
+  
+  int getX() { rmc.getX(); }
+  
+  int getY() { rmc.getY(); }
+  
+  void yMoveToPos(int pos){
     digitalWrite(isGripperPlaced, LOW);
     int moveY;
     int y = rmc.getY();
@@ -36,6 +57,8 @@ class AbsMotorController {
       moveY = y - pos;
       rmc.moveUp(moveY);
     }
-}
+  }
+  
+  RelMotorController getRelMotorController() {return rmc;}
 };
 #endif
